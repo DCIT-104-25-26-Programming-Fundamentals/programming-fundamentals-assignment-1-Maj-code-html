@@ -68,3 +68,95 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+def add(a, b):
+    return a + b
+
+
+def subtract(a, b):
+    return a - b
+
+
+def multiply(a, b):
+    return a * b
+
+
+def divide(a, b):
+    if b == 0:
+        return None
+    return round(a / b, 2)
+
+
+def modulus(a, b):
+    if b == 0:
+        return None
+    return a % b
+
+
+def exponentiate(a, b):
+    return a ** b
+
+
+def print_menu():
+    print("=============================")
+    print("     SIMPLE CALCULATOR")
+    print("=============================")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Modulus")
+    print("6. Exponentiation")
+    print("7. Quit")
+
+
+def get_number(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Error: please enter a valid number.")
+
+
+def part_calculation(operation_name, func, allow_zero_second=True):
+    a = get_number("Enter first number : ")
+    b = get_number("Enter second number: ")
+    if not allow_zero_second and b == 0:
+        print("Error: Cannot divide by zero.")
+        return
+    result = func(a, b)
+    if result is None:
+        print("Error: Cannot divide by zero.")
+    else:
+        if operation_name == "/":
+            print(f"Result: {a} {operation_name} {b} = {result:.2f}")
+        else:
+            print(f"Result: {a} {operation_name} {b} = {result}")
+
+
+def main():
+    while True:
+        print_menu()
+        choice = input("Select an operation (1-7): ").strip()
+        if choice == "1":
+            part_calculation("+", add)
+        elif choice == "2":
+            part_calculation("-", subtract)
+        elif choice == "3":
+            part_calculation("*", multiply)
+        elif choice == "4":
+            part_calculation("/", divide, allow_zero_second=False)
+        elif choice == "5":
+            part_calculation("%", modulus, allow_zero_second=False)
+        elif choice == "6":
+            part_calculation("**", exponentiate)
+        elif choice == "7":
+            print("Goodbye!")
+            break
+        else:
+            print("Error: invalid choice. Please enter 1-7.")
+
+
+if __name__ == "__main__":
+    main()
+
